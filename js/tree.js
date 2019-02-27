@@ -5,21 +5,20 @@ $(document).ready(function () {
     }, 50)
 
     function setLine() {
-        console.clear()
+        // console.clear()
         $.each($('.title'), function (i, v) {
-            let $child = $(v).siblings('.children');
-            let $childBox = $child.children('.children-box');
-            let lastChildBox = $($childBox[$childBox.length - 1]);
-            let titleLeftLine = $(v).children('.line');
+            const $child = $(v).siblings('.children');
+            const $childBox = $child.children('.children-box');
+            const lastChildBox = $($childBox[$childBox.length - 1]);
+            const titleLeftLine = $(v).children('.line');
             if (lastChildBox.length > 0) {
                 if (titleLeftLine.length > 0) {
-
                     titleLeftLine.css({
                         height: lastChildBox.offset().top - titleLeftLine.offset().top + 20
                     })
                 }
             } else {
-                let $childTitle = $child.children('.title');
+                const $childTitle = $child.children('.title');
                 if ($childTitle.length > 0 && titleLeftLine.length > 0) {
                     titleLeftLine.css({
                         height: $childTitle.offset().top - titleLeftLine.offset().top + 9
@@ -32,11 +31,11 @@ $(document).ready(function () {
 
     }
 
-    let titles = $('.title');
+    const titles = $('.title');
     // 初始化箭头
     $.each(titles, function (i, v) {
         $(v).append('<i></i>')
-        let arrowDom = $(v).children('i');
+        const arrowDom = $(v).children('i');
         arrowDom.data('arrow', 'right');
         arrowDom.addClass('glyphicon glyphicon-triangle-right')
         if (i > -1) {
@@ -48,7 +47,7 @@ $(document).ready(function () {
         setTimeout(function () {
             setLine()
         }, 30)
-        let children = $(this).siblings('.children');
+        const children = $(this).siblings('.children');
         // 设置arrow箭头动画
         children.toggle(400);
         $(this).children('.line').toggle(400);
@@ -59,8 +58,7 @@ $(document).ready(function () {
             }
         })
         if (!$(this).children('.line').length) {
-            console.clear()
-            log($(this).siblings('.children')[0])
+            // log($(this).siblings('.children')[0])
             if ($(this).siblings('.children').length > 0) {
                 $(this).append('<div class="line"></div>')
             }
