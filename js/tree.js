@@ -1,20 +1,22 @@
 $(document).ready(function () {
     const log = console.log;
-    setInterval(function () {
-        setLine()
-    }, 50)
-
+    // setInterval(function () {
+    //     setLine()
+    // }, 50)
+$('#reload').on('click',function(){
+    setLine()
+})
     function setLine() {
-        // console.clear()
         $.each($('.title'), function (i, v) {
             const $child = $(v).siblings('.children');
             const $childBox = $child.children('.children-box');
             const lastChildBox = $($childBox[$childBox.length - 1]);
             const titleLeftLine = $(v).children('.line');
+            log(lastChildBox)
             if (lastChildBox.length > 0) {
                 if (titleLeftLine.length > 0) {
                     titleLeftLine.css({
-                        height: lastChildBox.offset().top - titleLeftLine.offset().top + 20
+                        height: lastChildBox.offset().top - titleLeftLine.offset().top + 19
                     })
                 }
             } else {
@@ -25,6 +27,14 @@ $(document).ready(function () {
                     })
                 }
 
+            }
+            // 如果出现多个children-box
+            const $siblingsChild = $(v).siblings('.children');
+            if($siblingsChild.length>1 && titleLeftLine.length>0){
+                let lastSiblingsChild = $siblingsChild[$siblingsChild.length-1]
+                titleLeftLine.css({
+                    height: $(lastSiblingsChild).offset().top - titleLeftLine.offset().top + 19
+                })
             }
 
         })
@@ -44,9 +54,9 @@ $(document).ready(function () {
     })
     titles.on('click', function (e) {
         e.stopPropagation();
-        setTimeout(function () {
-            setLine()
-        }, 30)
+        // setTimeout(function () {
+        //     setLine()
+        // }, 30)
         const children = $(this).siblings('.children');
         // 设置arrow箭头动画
         children.toggle(400);
